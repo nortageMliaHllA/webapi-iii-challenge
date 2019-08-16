@@ -1,10 +1,14 @@
 // code away!
+require('dotenv').config();
 const express = require('express');
 const server = express();
+
 
 const postRouter = require('./posts/postRouter');
 const userRouter = require('./users/userRouter');
 const serverRouter = require('./server');
+
+
 
 server.use(express.json());
 server.use('/', serverRouter);
@@ -15,6 +19,8 @@ server.get('/', (req, res) => {
     res.send(`<h2>Let's write some middleware!</h2>`)
   });
  
-server.listen(4000, () => {
-    console.log('\n Server running on port http://localhost:4000 ***\n');
+const port = process.env.PORT || 4000;
+
+server.listen(port, () => {
+    console.log(`\n*** Server running on port ${port} ***\n`);
 });
